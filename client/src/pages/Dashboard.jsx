@@ -86,12 +86,13 @@ const Dashboard = () => {
   });
 
   return (
-    <div className="min-h-screen pt-28 pb-10 px-4">
+    <div className="min-h-screen pt-28 pb-10 px-4 transition-colors duration-300">
       <div className="max-w-5xl mx-auto">
-        {/* Header */}
+        {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
           <div>
-            <h1 className="text-3xl font-bold dark:text-white transition-colors">
+            {/* FIXED: Explicit text-white for dark mode */}
+            <h1 className="text-3xl font-bold text-slate-800 dark:text-white transition-colors">
               Workspace
             </h1>
             <p className="text-slate-500 dark:text-slate-400 mt-1">
@@ -99,7 +100,7 @@ const Dashboard = () => {
             </p>
           </div>
           <div className="text-right hidden md:block">
-            <p className="text-sm font-semibold text-slate-400 uppercase tracking-wider">
+            <p className="text-sm font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
               Current Date
             </p>
             <p className="text-xl font-bold text-slate-700 dark:text-slate-200">
@@ -114,84 +115,93 @@ const Dashboard = () => {
 
         {/* Stats Row */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 flex items-center justify-between transition-colors">
-            <div>
-              <p className="text-slate-400 text-sm font-semibold uppercase">
-                Total Tasks
-              </p>
-              <p className="text-3xl font-bold text-slate-800 dark:text-white mt-1">
-                {totalTasks}
-              </p>
-            </div>
-            <div className="w-12 h-12 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 rounded-full flex items-center justify-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-                />
-              </svg>
-            </div>
-          </div>
-
-          <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 flex items-center justify-between transition-colors">
-            <div>
-              <p className="text-amber-500 text-sm font-semibold uppercase">
-                Pending
-              </p>
-              <p className="text-3xl font-bold text-slate-800 dark:text-white mt-1">
-                {pendingTasks}
-              </p>
-            </div>
-            <div className="w-12 h-12 bg-amber-50 dark:bg-amber-900/20 text-amber-500 rounded-full flex items-center justify-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
+          {/* Card 1: Total */}
+          <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 transition-colors">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-slate-400 text-sm font-semibold uppercase">
+                  Total Tasks
+                </p>
+                <p className="text-3xl font-bold text-slate-800 dark:text-white mt-1">
+                  {totalTasks}
+                </p>
+              </div>
+              <div className="w-12 h-12 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 rounded-full flex items-center justify-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                  />
+                </svg>
+              </div>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 flex items-center justify-between transition-colors">
-            <div>
-              <p className="text-emerald-500 text-sm font-semibold uppercase">
-                Completed
-              </p>
-              <p className="text-3xl font-bold text-slate-800 dark:text-white mt-1">
-                {completedTasks}
-              </p>
+          {/* Card 2: Pending */}
+          <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 transition-colors">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-amber-500 text-sm font-semibold uppercase">
+                  Pending
+                </p>
+                <p className="text-3xl font-bold text-slate-800 dark:text-white mt-1">
+                  {pendingTasks}
+                </p>
+              </div>
+              <div className="w-12 h-12 bg-amber-50 dark:bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
             </div>
-            <div className="w-12 h-12 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-500 rounded-full flex items-center justify-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
+          </div>
+
+          {/* Card 3: Completed */}
+          <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 transition-colors">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-emerald-500 text-sm font-semibold uppercase">
+                  Completed
+                </p>
+                <p className="text-3xl font-bold text-slate-800 dark:text-white mt-1">
+                  {completedTasks}
+                </p>
+              </div>
+              <div className="w-12 h-12 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-500 rounded-full flex items-center justify-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
             </div>
           </div>
         </div>
@@ -217,10 +227,11 @@ const Dashboard = () => {
                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                 />
               </svg>
+              {/* FIXED: Input background darker than card to show depth */}
               <input
                 type="text"
                 placeholder="Search tasks..."
-                className="w-full pl-12 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border-none rounded-xl text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition placeholder-slate-400"
+                className="w-full pl-12 pr-4 py-3 bg-slate-50 dark:bg-slate-950 border-none rounded-xl text-slate-700 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none transition placeholder-slate-400"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -250,7 +261,7 @@ const Dashboard = () => {
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
           </div>
         ) : tasks.length === 0 ? (
-          <div className="text-center py-16 bg-white dark:bg-slate-900 rounded-3xl border border-dashed border-slate-300 dark:border-slate-700 transition-colors">
+          <div className="text-center py-16 bg-white dark:bg-slate-900 rounded-3xl border border-dashed border-slate-300 dark:border-slate-800 transition-colors">
             <div className="w-16 h-16 bg-slate-50 dark:bg-slate-800 text-slate-300 dark:text-slate-600 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
