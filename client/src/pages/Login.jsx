@@ -13,11 +13,17 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    // Log the attempt for debugging
+    console.log("Attempting login for:", email);
+
     try {
       await login(email, password);
+      console.log("Login successful. Redirecting to dashboard...");
       toast.success("Login Successful!");
       navigate("/dashboard");
     } catch (err) {
+      console.error("Login failed:", err.response?.data?.msg || err.message);
       toast.error("Invalid Credentials");
     } finally {
       setLoading(false);
@@ -26,7 +32,6 @@ const Login = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
-      {/* FIXED: Added border to card in dark mode so it stands out */}
       <div className="bg-white dark:bg-slate-900 p-10 rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-none w-96 border border-slate-100 dark:border-slate-800 transition-colors">
         <div className="text-center mb-8">
           <img
@@ -51,7 +56,6 @@ const Login = () => {
               type="email"
               name="email"
               id="email"
-              // FIXED: Input bg is now slate-950 (darker) to look like an input box
               className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 text-slate-800 dark:text-white transition"
               placeholder="Enter your email"
               value={email}
