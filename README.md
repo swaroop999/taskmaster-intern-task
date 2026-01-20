@@ -2,7 +2,7 @@
 
 TaskMaster is a modern, scalable task management application built to demonstrate full-stack development capabilities. It features secure JWT authentication, a responsive glassmorphism UI, and real-time database interactions.
 
-**Live Demo:** [Insert your Vercel Frontend Link Here]
+**Live Demo:** [(https://taskmaster-intern-task-n79s.vercel.app/)]
 
 ## ✨ Features
 
