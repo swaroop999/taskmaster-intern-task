@@ -11,46 +11,39 @@ const TaskItem = ({ task, onToggle, onDelete }) => {
         className="flex items-center gap-4 cursor-pointer flex-1"
         onClick={() => onToggle(task._id)}
       >
-        {/* Custom Icon Box */}
-        <div
-          className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
-            task.isCompleted
-              ? "bg-emerald-100 text-emerald-600"
-              : "bg-amber-100 text-amber-600 group-hover:bg-indigo-100 group-hover:text-indigo-600"
-          }`}
-        >
-          {task.isCompleted ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                clipRule="evenodd"
-              />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          )}
+        {/* Interactive Checkbox */}
+        <div className="relative flex items-center justify-center">
+          <input
+            type="checkbox"
+            checked={task.isCompleted}
+            onChange={() => {}} // Handled by parent onClick
+            className="peer sr-only"
+          />
+          <div
+            className={`w-6 h-6 rounded-md border-2 flex items-center justify-center transition-all duration-200 group-hover:scale-110 ${
+              task.isCompleted
+                ? "bg-emerald-500 border-emerald-500 dark:bg-emerald-600 dark:border-emerald-600"
+                : "border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 group-hover:border-indigo-500 dark:group-hover:border-indigo-400 group-hover:bg-indigo-50 dark:group-hover:bg-indigo-900/20"
+            }`}
+          >
+            {task.isCompleted && (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4 text-white"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            )}
+          </div>
         </div>
 
-        <div className="flex flex-col">
+        <div className="flex flex-col flex-1">
           <span
             className={`text-lg font-medium transition-all duration-300 ${
               task.isCompleted
