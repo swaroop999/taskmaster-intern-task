@@ -7,17 +7,28 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // 1. Add loading state
+  const [loading, setLoading] = useState(false);
+
   const { register } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // 2. Start loading
+    setLoading(true);
+
     try {
       await register(name, email, password);
       toast.success("Registered Successfully!");
       navigate("/dashboard");
     } catch (err) {
       toast.error("User already exists or Error");
+    } finally {
+      // 3. Stop loading (runs whether success or fail)
+      setLoading(false);
     }
   };
 
@@ -67,11 +78,18 @@ const Register = () => {
               required
             />
           </div>
+
+          {/* 4. Updated Button with Loading Logic */}
           <button
             type="submit"
-            className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition duration-300"
+            disabled={loading}
+            className={`w-full text-white py-2 rounded-md transition duration-300 ${
+              loading
+                ? "bg-indigo-400 cursor-not-allowed"
+                : "bg-indigo-600 hover:bg-indigo-700"
+            }`}
           >
-            Sign Up
+            {loading ? "Creating Account..." : "Sign Up"}
           </button>
         </form>
         <p className="mt-4 text-center text-sm text-gray-600">
