@@ -71,12 +71,6 @@ const Dashboard = () => {
     return matchesSearch && matchesFilter;
   });
 
-  // #region agent log
-  useEffect(() => {
-    fetch('http://127.0.0.1:7243/ingest/288a1c21-efcb-437e-a49d-d6bc09d28cdc',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Dashboard.jsx:75',message:'Dashboard rendered',data:{htmlHasDarkClass:document.documentElement.classList.contains('dark'),htmlClassList:document.documentElement.classList.toString(),bodyComputedBg:window.getComputedStyle(document.body).backgroundColor},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H2'})}).catch(()=>{});
-  }, []);
-  // #endregion
-
   return (
     <div className="min-h-screen pt-28 pb-10 px-4 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
       <div className="max-w-5xl mx-auto">
@@ -95,11 +89,7 @@ const Dashboard = () => {
 
         {/* Stats Row */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 transition-colors" ref={(el) => {
-            // #region agent log
-            if (el) fetch('http://127.0.0.1:7243/ingest/288a1c21-efcb-437e-a49d-d6bc09d28cdc',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Dashboard.jsx:92',message:'Stats card rendered',data:{computedBg:window.getComputedStyle(el).backgroundColor,hasWhiteClass:el.classList.contains('bg-white'),htmlHasDarkClass:document.documentElement.classList.contains('dark')},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3_H4'})}).catch(()=>{});
-            // #endregion
-          }}>
+          <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 transition-colors">
             <div className="flex items-center justify-between">
               <div>
                 <p className="opacity-60 text-sm font-semibold uppercase text-slate-600 dark:text-slate-400">Total Tasks</p>

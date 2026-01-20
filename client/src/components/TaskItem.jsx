@@ -1,17 +1,6 @@
-import React from 'react';
-
 const TaskItem = ({ task, onToggle, onDelete }) => {
-  // #region agent log
-  const taskRef = React.useRef(null);
-  React.useEffect(() => {
-    if (taskRef.current) {
-      fetch('http://127.0.0.1:7243/ingest/288a1c21-efcb-437e-a49d-d6bc09d28cdc',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'TaskItem.jsx:4',message:'TaskItem rendered',data:{taskId:task._id,computedBg:window.getComputedStyle(taskRef.current).backgroundColor,htmlHasDarkClass:document.documentElement.classList.contains('dark')},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
-    }
-  }, [task._id]);
-  // #endregion
   return (
     <div
-      ref={taskRef}
       className={`group relative flex justify-between items-center p-5 mb-4 bg-white dark:bg-slate-900 rounded-xl border-l-4 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1 ${
         task.isCompleted
           ? "border-l-emerald-400 opacity-75"
