@@ -1,37 +1,45 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors");
-const dotenv = require("dotenv");
+const cors = require("cors"); // Import the CORS library
+require("dotenv").config();
 
-dotenv.config();
+const authRoutes = require("./routes/auth");
+const taskRoutes = require("./routes/tasks");
 
 const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors());
 
-// DB Connection
-const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log("✅ MongoDB Connected");
-  } catch (err) {
-    console.error("❌ Database connection error:", err);
-    process.exit(1);
-  }
-};
-connectDB();
+// CORS CONFIGURATION (The Fix)
+app.use(
+  cors({
+    origin: "*", // Allow ALL domains to access this API
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  }),
+);
 
-// Define Routes
-app.use("/api/auth", require("./routes/auth"));
-app.use("/api/tasks", require("./routes/tasks"));
+// Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/tasks", taskRoutes);
 
-// Test Route
+// Database Connection
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch((err) => console.log("❌ MongoDB Error:", err));
+
+// Base Route (To check if server is alive)
 app.get("/", (req, res) => {
-  res.send("TaskMaster API is running...");
+  res.send("API is working!");
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+// Export for Vercel
 module.exports = app;
+
+// Local Development Server
+if (require.main === module) {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+}
