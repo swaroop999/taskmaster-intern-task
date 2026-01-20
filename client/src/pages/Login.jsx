@@ -29,7 +29,7 @@ const Login = () => {
       <div className="bg-white p-10 rounded-2xl shadow-xl shadow-slate-200/50 w-96 border border-slate-100">
         <div className="text-center mb-8">
           <img
-            src="/logo.png"
+            src="/task-icon.png"
             alt="Logo"
             className="w-16 h-16 mx-auto mb-4 rounded-xl shadow-lg shadow-indigo-200"
           />

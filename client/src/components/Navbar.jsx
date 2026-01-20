@@ -16,7 +16,7 @@ const Navbar = () => {
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         <Link to="/" className="flex items-center gap-2 group">
           <img
-            src="/logo.png"
+            src="/task-icon.png"
             alt="TaskMaster Logo"
             className="w-8 h-8 rounded-lg shadow-lg group-hover:shadow-indigo-500/30 transition-all"
           />
