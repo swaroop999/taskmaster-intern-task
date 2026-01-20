@@ -19,7 +19,10 @@ const Register = () => {
       toast.success("Account Created!");
       navigate("/dashboard");
     } catch (err) {
-      toast.error("User already exists or Error");
+      // This will show the ACTUAL error from the server (e.g. "Server Error" or "Email taken")
+      const errorMessage = err.response?.data?.msg || "Registration Failed";
+      toast.error(errorMessage);
+      console.error("Registration Error:", err);
     } finally {
       setLoading(false);
     }
