@@ -1,14 +1,14 @@
 const TaskItem = ({ task, onToggle, onDelete }) => {
   return (
     <div
-      className={`group relative flex justify-between items-center p-5 mb-4 bg-white dark:bg-slate-900 rounded-xl border-l-4 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1 ${
+      className={`group relative flex justify-between items-center p-3 sm:p-4 md:p-5 bg-white dark:bg-slate-900 rounded-lg sm:rounded-xl border-l-4 shadow-sm transition-all duration-300 hover:shadow-md sm:hover:-translate-y-1 ${
         task.isCompleted
           ? "border-l-emerald-400 opacity-75"
           : "border-l-amber-400 border-y border-r border-slate-100 dark:border-slate-800"
       }`}
     >
       <div
-        className="flex items-center gap-4 cursor-pointer flex-1"
+        className="flex items-center gap-2 sm:gap-3 md:gap-4 cursor-pointer flex-1 min-w-0"
         onClick={() => onToggle(task._id)}
       >
         {/* Interactive Checkbox */}
@@ -43,9 +43,9 @@ const TaskItem = ({ task, onToggle, onDelete }) => {
           </div>
         </div>
 
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-col flex-1 min-w-0">
           <span
-            className={`text-lg font-medium transition-all duration-300 ${
+            className={`text-sm sm:text-base md:text-lg font-medium transition-all duration-300 break-words ${
               task.isCompleted
                 ? "line-through text-slate-400 dark:text-slate-500"
                 : "text-slate-700 dark:text-slate-200"
@@ -54,23 +54,23 @@ const TaskItem = ({ task, onToggle, onDelete }) => {
             {task.title}
           </span>
           <span
-            className={`text-xs font-semibold uppercase tracking-wider mt-0.5 ${
-              task.isCompleted ? "text-emerald-500" : "text-amber-500"
+            className={`text-[10px] sm:text-xs font-semibold uppercase tracking-wider mt-0.5 ${
+              task.isCompleted ? "text-emerald-500 dark:text-emerald-400" : "text-amber-500 dark:text-amber-400"
             }`}
           >
-            {task.isCompleted ? "Completed" : "Pending Action"}
+            {task.isCompleted ? "Completed" : "Pending"}
           </span>
         </div>
       </div>
 
       <button
         onClick={() => onDelete(task._id)}
-        className="text-slate-300 dark:text-slate-600 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 p-2 rounded-lg transition-all"
+        className="text-slate-300 dark:text-slate-600 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 p-1.5 sm:p-2 rounded-lg transition-all flex-shrink-0"
         title="Delete Task"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
+          className="h-4 w-4 sm:h-5 sm:w-5"
           viewBox="0 0 20 20"
           fill="currentColor"
         >

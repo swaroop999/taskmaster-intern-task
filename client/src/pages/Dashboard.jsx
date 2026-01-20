@@ -105,23 +105,23 @@ const Dashboard = () => {
   });
 
   return (
-    <div className="min-h-screen pt-28 pb-10 px-4 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+    <div className="min-h-screen pt-20 sm:pt-24 md:pt-28 pb-6 sm:pb-10 px-3 sm:px-4 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
       <div className="max-w-5xl mx-auto">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 sm:mb-8 gap-3 sm:gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-slate-900 dark:text-white transition-colors">
+            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white transition-colors">
               Workspace
             </h1>
-            <p className="mt-1 opacity-75 text-slate-600 dark:text-slate-300">
+            <p className="mt-1 opacity-75 text-sm sm:text-base text-slate-600 dark:text-slate-300">
               Manage your daily goals, {user && user.name}.
             </p>
           </div>
-          <div className="text-right hidden md:block">
-            <p className="text-sm font-semibold opacity-60 uppercase tracking-wider text-slate-600 dark:text-slate-400">
+          <div className="text-left md:text-right w-full md:w-auto">
+            <p className="text-xs sm:text-sm font-semibold opacity-60 uppercase tracking-wider text-slate-600 dark:text-slate-400">
               Current Date
             </p>
-            <p className="text-xl font-bold opacity-90 text-slate-900 dark:text-slate-100">
+            <p className="text-base sm:text-xl font-bold opacity-90 text-slate-900 dark:text-slate-100">
               {new Date().toLocaleDateString("en-US", {
                 weekday: "long",
                 month: "long",
@@ -132,21 +132,21 @@ const Dashboard = () => {
         </div>
 
         {/* Stats Row */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 transition-colors">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
+          <div className="bg-white dark:bg-slate-900 p-4 sm:p-5 rounded-xl sm:rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 transition-colors">
             <div className="flex items-center justify-between">
               <div>
-                <p className="opacity-60 text-sm font-semibold uppercase text-slate-600 dark:text-slate-400">
+                <p className="opacity-60 text-xs sm:text-sm font-semibold uppercase text-slate-600 dark:text-slate-400">
                   Total Tasks
                 </p>
-                <p className="text-3xl font-bold mt-1 text-slate-900 dark:text-white">
+                <p className="text-2xl sm:text-3xl font-bold mt-1 text-slate-900 dark:text-white">
                   {totalTasks}
                 </p>
               </div>
-              <div className="w-12 h-12 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-full flex items-center justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
+                  className="h-5 w-5 sm:h-6 sm:w-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -162,20 +162,20 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 transition-colors">
+          <div className="bg-white dark:bg-slate-900 p-4 sm:p-5 rounded-xl sm:rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 transition-colors">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-amber-500 dark:text-amber-400 text-sm font-semibold uppercase">
+                <p className="text-amber-500 dark:text-amber-400 text-xs sm:text-sm font-semibold uppercase">
                   Pending
                 </p>
-                <p className="text-3xl font-bold mt-1 text-slate-900 dark:text-white">
+                <p className="text-2xl sm:text-3xl font-bold mt-1 text-slate-900 dark:text-white">
                   {pendingTasks}
                 </p>
               </div>
-              <div className="w-12 h-12 bg-amber-50 dark:bg-amber-900/30 text-amber-500 dark:text-amber-400 rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-amber-50 dark:bg-amber-900/30 text-amber-500 dark:text-amber-400 rounded-full flex items-center justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
+                  className="h-5 w-5 sm:h-6 sm:w-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -191,20 +191,20 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 transition-colors">
+          <div className="bg-white dark:bg-slate-900 p-4 sm:p-5 rounded-xl sm:rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 transition-colors">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-emerald-500 dark:text-emerald-400 text-sm font-semibold uppercase">
+                <p className="text-emerald-500 dark:text-emerald-400 text-xs sm:text-sm font-semibold uppercase">
                   Completed
                 </p>
-                <p className="text-3xl font-bold mt-1 text-slate-900 dark:text-white">
+                <p className="text-2xl sm:text-3xl font-bold mt-1 text-slate-900 dark:text-white">
                   {completedTasks}
                 </p>
               </div>
-              <div className="w-12 h-12 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-500 dark:text-emerald-400 rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-500 dark:text-emerald-400 rounded-full flex items-center justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
+                  className="h-5 w-5 sm:h-6 sm:w-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -222,12 +222,12 @@ const Dashboard = () => {
         </div>
 
         {/* Task Form Container */}
-        <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 p-6 mb-8 transition-colors">
+        <div className="bg-white dark:bg-slate-900 rounded-xl sm:rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 p-4 sm:p-6 mb-6 sm:mb-8 transition-colors">
           <TaskForm onAdd={addTask} />
 
-          <div className="h-px bg-slate-100 dark:bg-slate-800 my-6"></div>
+          <div className="h-px bg-slate-100 dark:bg-slate-800 my-4 sm:my-6"></div>
 
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col gap-3 sm:gap-4">
             <div className="relative flex-1">
               <svg
                 className="absolute left-4 top-3.5 h-5 w-5 opacity-50 text-slate-500 dark:text-slate-400"
@@ -256,7 +256,7 @@ const Dashboard = () => {
                 <button
                   key={status}
                   onClick={() => setFilterStatus(status)}
-                  className={`px-6 py-2 rounded-lg text-sm font-semibold capitalize transition-all ${
+                  className={`flex-1 px-3 sm:px-6 py-2 rounded-lg text-xs sm:text-sm font-semibold capitalize transition-all ${
                     filterStatus === status
                       ? "bg-white dark:bg-slate-900 shadow-sm text-slate-900 dark:text-slate-100"
                       : "opacity-60 hover:opacity-100 text-slate-700 dark:text-slate-300"
@@ -306,7 +306,7 @@ const Dashboard = () => {
             </p>
           </div>
         ) : (
-          <div className="space-y-1">
+          <div className="space-y-2 sm:space-y-3">
             {filteredTasks.map((task) => (
               <TaskItem
                 key={task._id}

@@ -15,17 +15,17 @@ const TaskForm = ({ onAdd }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-6 flex gap-2">
+    <form onSubmit={handleSubmit} className="mb-4 sm:mb-6 flex gap-2">
       <input
         type="text"
-        className="flex-1 px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-800 dark:text-white placeholder-slate-400 transition-colors"
+        className="flex-1 px-3 sm:px-4 py-2.5 sm:py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-sm sm:text-base text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 transition-colors"
         placeholder="What needs to be done?"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
       <button
         type="submit"
-        className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition font-medium shadow-md shadow-indigo-200 dark:shadow-none"
+        className="bg-indigo-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg hover:bg-indigo-700 transition font-medium shadow-md shadow-indigo-200 dark:shadow-none text-sm sm:text-base whitespace-nowrap"
       >
         Add
       </button>

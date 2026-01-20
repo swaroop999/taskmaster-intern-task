@@ -26,20 +26,20 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800 shadow-sm transition-colors duration-300">
-      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+      <div className="container mx-auto px-3 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
         {/* Logo Section */}
-        <Link to="/" className="flex items-center gap-2 group">
+        <Link to="/" className="flex items-center gap-1.5 sm:gap-2 group">
           <img
             src="/task-icon.png"
             alt="TaskMaster Logo"
-            className="w-8 h-8 rounded-lg shadow-lg group-hover:shadow-indigo-500/30 transition-all"
+            className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg shadow-lg group-hover:shadow-indigo-500/30 transition-all"
           />
-          <span className="text-xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
+          <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
             TaskMaster
           </span>
         </Link>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           {/* 3. Dark Mode Toggle Button */}
           <button
             onClick={toggleTheme}
@@ -94,22 +94,22 @@ const Navbar = () => {
               </div>
               <button
                 onClick={onLogout}
-                className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-4 py-2 rounded-full text-sm font-medium hover:bg-red-50 hover:text-red-600 hover:border-red-100 dark:hover:bg-slate-700 dark:hover:text-red-400 transition-all duration-200"
+                className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium hover:bg-red-50 hover:text-red-600 hover:border-red-100 dark:hover:bg-slate-700 dark:hover:text-red-400 transition-all duration-200"
               >
                 Logout
               </button>
             </div>
           ) : (
-            <div className="flex gap-4">
+            <div className="flex gap-2 sm:gap-4">
               <Link
                 to="/"
-                className="text-slate-600 dark:text-slate-300 font-medium hover:text-indigo-600 transition px-4 py-2"
+                className="text-slate-600 dark:text-slate-300 font-medium hover:text-indigo-600 transition px-2 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-base"
               >
                 Login
               </Link>
               <Link
                 to="/register"
-                className="bg-slate-900 dark:bg-indigo-600 text-white px-5 py-2 rounded-full font-medium hover:bg-slate-800 dark:hover:bg-indigo-500 transition-all shadow-lg"
+                className="bg-slate-900 dark:bg-indigo-600 text-white px-3 sm:px-5 py-1.5 sm:py-2 rounded-full font-medium hover:bg-slate-800 dark:hover:bg-indigo-500 transition-all shadow-lg text-xs sm:text-base"
               >
                 Get Started
               </Link>
