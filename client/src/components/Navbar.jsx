@@ -11,12 +11,24 @@ const Navbar = () => {
 
   // 2. Toggle Logic
   const toggleTheme = () => {
+    // #region agent log
+    fetch('http://127.0.0.1:7243/ingest/288a1c21-efcb-437e-a49d-d6bc09d28cdc',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Navbar.jsx:13',message:'toggleTheme called',data:{darkModeBefore:darkMode,htmlClassListBefore:document.documentElement.classList.toString()},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H1'})}).catch(()=>{});
+    // #endregion
     setDarkMode(!darkMode);
     if (!darkMode) {
       document.documentElement.classList.add("dark");
+      // #region agent log
+      fetch('http://127.0.0.1:7243/ingest/288a1c21-efcb-437e-a49d-d6bc09d28cdc',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Navbar.jsx:16',message:'Added dark class',data:{htmlClassListAfter:document.documentElement.classList.toString()},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H1'})}).catch(()=>{});
+      // #endregion
     } else {
       document.documentElement.classList.remove("dark");
+      // #region agent log
+      fetch('http://127.0.0.1:7243/ingest/288a1c21-efcb-437e-a49d-d6bc09d28cdc',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Navbar.jsx:18',message:'Removed dark class',data:{htmlClassListAfter:document.documentElement.classList.toString()},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H1'})}).catch(()=>{});
+      // #endregion
     }
+    // #region agent log
+    fetch('http://127.0.0.1:7243/ingest/288a1c21-efcb-437e-a49d-d6bc09d28cdc',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Navbar.jsx:20',message:'toggleTheme completed',data:{darkModeAfter:!darkMode,htmlClassListFinal:document.documentElement.classList.toString()},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H1'})}).catch(()=>{});
+    // #endregion
   };
 
   const onLogout = () => {
