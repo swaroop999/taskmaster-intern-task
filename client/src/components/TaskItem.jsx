@@ -1,26 +1,41 @@
 const TaskItem = ({ task, onToggle, onDelete }) => {
   return (
     <div
-      className={`group flex justify-between items-center p-5 mb-4 bg-white rounded-2xl border transition-all duration-300 ${
+      className={`group relative flex justify-between items-center p-5 mb-4 bg-white rounded-xl border-l-4 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1 ${
         task.isCompleted
-          ? "border-gray-100 bg-gray-50 opacity-75"
-          : "border-white shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-indigo-100"
+          ? "border-l-emerald-400 opacity-75"
+          : "border-l-amber-400 border-y border-r border-slate-100"
       }`}
     >
       <div
         className="flex items-center gap-4 cursor-pointer flex-1"
         onClick={() => onToggle(task._id)}
       >
+        {/* Custom Icon Box */}
         <div
-          className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors duration-300 ${
+          className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
             task.isCompleted
-              ? "bg-green-500 border-green-500"
-              : "border-gray-300 group-hover:border-indigo-500"
+              ? "bg-emerald-100 text-emerald-600"
+              : "bg-amber-100 text-amber-600 group-hover:bg-indigo-100 group-hover:text-indigo-600"
           }`}
         >
-          {task.isCompleted && (
+          {task.isCompleted ? (
             <svg
-              className="w-4 h-4 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                clipRule="evenodd"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -28,26 +43,36 @@ const TaskItem = ({ task, onToggle, onDelete }) => {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={3}
-                d="M5 13l4 4L19 7"
+                strokeWidth={2}
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
           )}
         </div>
-        <span
-          className={`text-lg font-medium transition-all duration-300 ${
-            task.isCompleted
-              ? "line-through text-gray-400"
-              : "text-gray-700 group-hover:text-gray-900"
-          }`}
-        >
-          {task.title}
-        </span>
+
+        <div className="flex flex-col">
+          <span
+            className={`text-lg font-medium transition-all duration-300 ${
+              task.isCompleted
+                ? "line-through text-slate-400"
+                : "text-slate-700"
+            }`}
+          >
+            {task.title}
+          </span>
+          <span
+            className={`text-xs font-semibold uppercase tracking-wider mt-0.5 ${
+              task.isCompleted ? "text-emerald-500" : "text-amber-500"
+            }`}
+          >
+            {task.isCompleted ? "Completed" : "Pending Action"}
+          </span>
+        </div>
       </div>
 
       <button
         onClick={() => onDelete(task._id)}
-        className="opacity-0 group-hover:opacity-100 p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-all duration-300"
+        className="text-slate-300 hover:text-red-500 hover:bg-red-50 p-2 rounded-lg transition-all"
         title="Delete Task"
       >
         <svg

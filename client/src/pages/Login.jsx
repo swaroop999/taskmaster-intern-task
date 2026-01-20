@@ -6,34 +6,45 @@ import toast from "react-hot-toast";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await login(email, password);
       toast.success("Login Successful!");
       navigate("/dashboard");
     } catch (err) {
       toast.error("Invalid Credentials");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="flex justify-center items-center h-[80vh]">
-      <div className="bg-white p-8 rounded-lg shadow-md w-96 border border-gray-200">
-        <h2 className="text-2xl font-bold mb-6 text-center text-indigo-600">
-          Login
-        </h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="flex justify-center items-center h-[85vh] bg-slate-50">
+      <div className="bg-white p-10 rounded-2xl shadow-xl shadow-slate-200/50 w-96 border border-slate-100">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl text-white font-bold text-2xl mb-4 shadow-lg shadow-indigo-200">
+            T
+          </div>
+          <h2 className="text-2xl font-bold text-slate-800">Welcome Back</h2>
+          <p className="text-slate-500 text-sm mt-1">
+            Please enter your details to sign in.
+          </p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-semibold text-slate-700 mb-1">
               Email
             </label>
             <input
               type="email"
-              className="w-full px-4 py-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -41,12 +52,12 @@ const Login = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-semibold text-slate-700 mb-1">
               Password
             </label>
             <input
               type="password"
-              className="w-full px-4 py-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition"
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -55,14 +66,22 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition duration-300"
+            disabled={loading}
+            className={`w-full text-white font-semibold py-3 rounded-xl shadow-lg transition-all transform hover:-translate-y-0.5 ${
+              loading
+                ? "bg-indigo-300 cursor-not-allowed"
+                : "bg-indigo-600 hover:bg-indigo-700 shadow-indigo-200"
+            }`}
           >
-            Login
+            {loading ? "Signing in..." : "Sign In"}
           </button>
         </form>
-        <p className="mt-4 text-center text-sm text-gray-600">
+        <p className="mt-8 text-center text-sm text-slate-500">
           Don't have an account?{" "}
-          <Link to="/register" className="text-indigo-600 hover:underline">
+          <Link
+            to="/register"
+            className="text-indigo-600 font-semibold hover:underline"
+          >
             Register
           </Link>
         </p>
