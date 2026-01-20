@@ -1,25 +1,44 @@
 const TaskItem = ({ task, onToggle, onDelete }) => {
   return (
     <div
-      className={`flex justify-between items-center p-4 mb-3 bg-white rounded-lg shadow-sm border transition-all duration-200 ${
+      className={`group flex justify-between items-center p-5 mb-4 bg-white rounded-2xl border transition-all duration-300 ${
         task.isCompleted
-          ? "bg-gray-50 border-gray-100"
-          : "border-gray-200 hover:shadow-md"
+          ? "border-gray-100 bg-gray-50 opacity-75"
+          : "border-white shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-indigo-100"
       }`}
     >
       <div
-        className="flex items-center gap-3 cursor-pointer"
+        className="flex items-center gap-4 cursor-pointer flex-1"
         onClick={() => onToggle(task._id)}
       >
-        <input
-          type="checkbox"
-          checked={task.isCompleted}
-          readOnly
-          className="w-5 h-5 text-indigo-600 rounded focus:ring-indigo-500 cursor-pointer"
-        />
+        <div
+          className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors duration-300 ${
+            task.isCompleted
+              ? "bg-green-500 border-green-500"
+              : "border-gray-300 group-hover:border-indigo-500"
+          }`}
+        >
+          {task.isCompleted && (
+            <svg
+              className="w-4 h-4 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={3}
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          )}
+        </div>
         <span
-          className={`text-lg ${
-            task.isCompleted ? "line-through text-gray-400" : "text-gray-800"
+          className={`text-lg font-medium transition-all duration-300 ${
+            task.isCompleted
+              ? "line-through text-gray-400"
+              : "text-gray-700 group-hover:text-gray-900"
           }`}
         >
           {task.title}
@@ -28,7 +47,7 @@ const TaskItem = ({ task, onToggle, onDelete }) => {
 
       <button
         onClick={() => onDelete(task._id)}
-        className="text-gray-400 hover:text-red-500 transition p-2"
+        className="opacity-0 group-hover:opacity-100 p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-all duration-300"
         title="Delete Task"
       >
         <svg
