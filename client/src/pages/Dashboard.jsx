@@ -14,7 +14,9 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/tasks");
+        const res = await axios.get(
+          "https://taskmaster-intern-task.vercel.app/api/tasks",
+        );
         setTasks(res.data);
       } catch (err) {
         toast.error("Failed to load tasks");
@@ -28,7 +30,10 @@ const Dashboard = () => {
   // 2. Add Task Function
   const addTask = async (taskData) => {
     try {
-      const res = await axios.post("http://localhost:5000/api/tasks", taskData);
+      const res = await axios.post(
+        "https://taskmaster-intern-task.vercel.app/api/tasks",
+        taskData,
+      );
       setTasks([res.data, ...tasks]); // Add new task to top of list
       toast.success("Task Added");
     } catch (err) {
@@ -40,9 +45,12 @@ const Dashboard = () => {
   const toggleTask = async (id) => {
     try {
       const taskToToggle = tasks.find((t) => t._id === id);
-      const res = await axios.put(`http://localhost:5000/api/tasks/${id}`, {
-        isCompleted: !taskToToggle.isCompleted,
-      });
+      const res = await axios.put(
+        `https://taskmaster-intern-task.vercel.app/api/tasks/${id}`,
+        {
+          isCompleted: !taskToToggle.isCompleted,
+        },
+      );
 
       // Update local state
       setTasks(tasks.map((t) => (t._id === id ? res.data : t)));
@@ -54,7 +62,9 @@ const Dashboard = () => {
   // 4. Delete Task Function
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/tasks/${id}`);
+      await axios.delete(
+        `https://taskmaster-intern-task.vercel.app/api/tasks/${id}`,
+      );
       setTasks(tasks.filter((t) => t._id !== id)); // Remove from list
       toast.success("Task Deleted");
     } catch (err) {
