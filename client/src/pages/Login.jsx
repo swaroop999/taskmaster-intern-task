@@ -28,9 +28,11 @@ const Login = () => {
     <div className="flex justify-center items-center h-[85vh] bg-slate-50">
       <div className="bg-white p-10 rounded-2xl shadow-xl shadow-slate-200/50 w-96 border border-slate-100">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl text-white font-bold text-2xl mb-4 shadow-lg shadow-indigo-200">
-            T
-          </div>
+          <img
+            src="/logo.png"
+            alt="Logo"
+            className="w-16 h-16 mx-auto mb-4 rounded-xl shadow-lg shadow-indigo-200"
+          />
           <h2 className="text-2xl font-bold text-slate-800">Welcome Back</h2>
           <p className="text-slate-500 text-sm mt-1">
             Please enter your details to sign in.

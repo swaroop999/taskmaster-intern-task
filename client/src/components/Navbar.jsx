@@ -15,9 +15,11 @@ const Navbar = () => {
     <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-lg border-b border-slate-200 shadow-sm">
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:shadow-indigo-500/30 transition-all">
-            T
-          </div>
+          <img
+            src="/logo.png"
+            alt="TaskMaster Logo"
+            className="w-8 h-8 rounded-lg shadow-lg group-hover:shadow-indigo-500/30 transition-all"
+          />
           <span className="text-xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
             TaskMaster
           </span>
