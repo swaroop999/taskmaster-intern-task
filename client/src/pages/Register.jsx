@@ -26,7 +26,8 @@ const Register = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-[85vh] bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+    // CHANGED: h-[85vh] -> min-h-screen to fix dark mode background gaps
+    <div className="flex justify-center items-center min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
       <div className="bg-white dark:bg-slate-900 p-10 rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-none w-96 border border-slate-100 dark:border-slate-800 transition-colors">
         <div className="text-center mb-8">
           <img
@@ -48,8 +49,8 @@ const Register = () => {
             </label>
             <input
               type="text"
-              name="name" // <--- ADDED
-              id="name" // <--- ADDED
+              name="name"
+              id="name"
               className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 text-slate-800 dark:text-white transition"
               placeholder="Your Name"
               value={name}
@@ -63,8 +64,8 @@ const Register = () => {
             </label>
             <input
               type="email"
-              name="email" // <--- ADDED
-              id="email" // <--- ADDED
+              name="email"
+              id="email"
               className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 text-slate-800 dark:text-white transition"
               placeholder="Enter your email"
               value={email}
@@ -78,8 +79,8 @@ const Register = () => {
             </label>
             <input
               type="password"
-              name="password" // <--- ADDED
-              id="password" // <--- ADDED
+              name="password"
+              id="password"
               className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 text-slate-800 dark:text-white transition"
               placeholder="Choose a password"
               value={password}
