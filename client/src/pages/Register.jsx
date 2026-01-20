@@ -48,6 +48,8 @@ const Register = () => {
             </label>
             <input
               type="text"
+              name="name" // <--- ADDED
+              id="name" // <--- ADDED
               className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 text-slate-800 dark:text-white transition"
               placeholder="Your Name"
               value={name}
@@ -61,6 +63,8 @@ const Register = () => {
             </label>
             <input
               type="email"
+              name="email" // <--- ADDED
+              id="email" // <--- ADDED
               className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 text-slate-800 dark:text-white transition"
               placeholder="Enter your email"
               value={email}
@@ -74,6 +78,8 @@ const Register = () => {
             </label>
             <input
               type="password"
+              name="password" // <--- ADDED
+              id="password" // <--- ADDED
               className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 text-slate-800 dark:text-white transition"
               placeholder="Choose a password"
               value={password}
