@@ -26,27 +26,29 @@ const Register = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-[85vh] bg-slate-50">
-      <div className="bg-white p-10 rounded-2xl shadow-xl shadow-slate-200/50 w-96 border border-slate-100">
+    <div className="flex justify-center items-center h-[85vh] bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+      <div className="bg-white dark:bg-slate-900 p-10 rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-none w-96 border border-slate-100 dark:border-slate-800 transition-colors">
         <div className="text-center mb-8">
           <img
             src="/task-icon.png"
             alt="Logo"
-            className="w-16 h-16 mx-auto mb-4 rounded-xl shadow-lg shadow-indigo-200"
+            className="w-16 h-16 mx-auto mb-4 rounded-xl shadow-lg shadow-indigo-200 dark:shadow-none"
           />
-          <h2 className="text-2xl font-bold text-slate-800">Create Account</h2>
-          <p className="text-slate-500 text-sm mt-1">
+          <h2 className="text-2xl font-bold text-slate-800 dark:text-white">
+            Create Account
+          </h2>
+          <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">
             Start your productivity journey today.
           </p>
         </div>
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-1">
+            <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">
               Name
             </label>
             <input
               type="text"
-              className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition"
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 text-slate-800 dark:text-white transition"
               placeholder="Your Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -54,12 +56,12 @@ const Register = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-1">
+            <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">
               Email
             </label>
             <input
               type="email"
-              className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition"
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 text-slate-800 dark:text-white transition"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -67,12 +69,12 @@ const Register = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-1">
+            <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">
               Password
             </label>
             <input
               type="password"
-              className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition"
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 text-slate-800 dark:text-white transition"
               placeholder="Choose a password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -86,17 +88,17 @@ const Register = () => {
             className={`w-full text-white font-semibold py-3 rounded-xl shadow-lg transition-all transform hover:-translate-y-0.5 ${
               loading
                 ? "bg-indigo-300 cursor-not-allowed"
-                : "bg-indigo-600 hover:bg-indigo-700 shadow-indigo-200"
+                : "bg-indigo-600 hover:bg-indigo-700 shadow-indigo-200 dark:shadow-none"
             }`}
           >
             {loading ? "Creating Account..." : "Sign Up"}
           </button>
         </form>
-        <p className="mt-8 text-center text-sm text-slate-500">
+        <p className="mt-8 text-center text-sm text-slate-500 dark:text-slate-400">
           Already have an account?{" "}
           <Link
             to="/"
-            className="text-indigo-600 font-semibold hover:underline"
+            className="text-indigo-600 dark:text-indigo-400 font-semibold hover:underline"
           >
             Login
           </Link>
