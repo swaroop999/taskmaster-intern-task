@@ -37,13 +37,23 @@ const Dashboard = () => {
   };
 
   const toggleTask = async (id) => {
+    // Find the task to toggle
+    const taskToToggle = tasks.find((t) => t._id === id);
+    
+    // Optimistic update - update UI immediately
+    const optimisticTasks = tasks.map((t) => 
+      t._id === id ? { ...t, isCompleted: !t.isCompleted } : t
+    );
+    setTasks(optimisticTasks);
+
+    // Then sync with server in background
     try {
-      const taskToToggle = tasks.find((t) => t._id === id);
-      const res = await axios.put(`https://taskmaster-intern-task.vercel.app/api/tasks/${id}`, {
+      await axios.put(`https://taskmaster-intern-task.vercel.app/api/tasks/${id}`, {
         isCompleted: !taskToToggle.isCompleted,
       });
-      setTasks(tasks.map((t) => (t._id === id ? res.data : t)));
     } catch (err) {
+      // If server update fails, revert the optimistic update
+      setTasks(tasks);
       toast.error('Error updating task');
     }
   };
