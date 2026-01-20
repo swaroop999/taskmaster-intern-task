@@ -6,22 +6,33 @@
   body {
     @apply font-sans bg-slate-50 text-slate-900 transition-colors duration-300;
   }
-
+  
+  /* --- THE NUCLEAR DARK MODE FIX --- */
+  
+  /* 1. Force the main background to be deep dark blue */
   .dark body {
-    @apply bg-slate-950 text-slate-200;
+    @apply bg-slate-950 text-slate-200; 
   }
 
-  .dark h1,
-  .dark h2,
-  .dark h3,
-  .dark h4,
-  .dark h5,
-  .dark h6 {
-    @apply text-white;
+  /* 2. FORCE all Headings (Workspace, Welcome Back) to be pure white */
+  .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+    color: #ffffff !important;
   }
-
-  .dark .text-slate-500,
-  .dark .text-gray-500 {
-    @apply text-slate-400;
+  
+  /* 3. FORCE all secondary text to be readable light grey */
+  .dark p, .dark span, .dark label, .dark input {
+    color: #cbd5e1 !important; /* Slate-300 */
+  }
+  
+  /* 4. Fix the Cards to be distinct from the background */
+  .dark .bg-white {
+    background-color: #0f172a !important; /* Slate-900 */
+    border-color: #1e293b !important; /* Slate-800 */
+  }
+  
+  /* 5. Fix Input Boxes */
+  .dark input {
+    background-color: #020617 !important; /* Slate-950 */
+    border-color: #1e293b !important;
   }
 }

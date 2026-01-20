@@ -1,26 +1,24 @@
-import { useState, useEffect, useContext } from "react";
-import AuthContext from "../context/AuthContext";
-import axios from "axios";
-import TaskForm from "../components/TaskForm";
-import TaskItem from "../components/TaskItem";
-import toast from "react-hot-toast";
+import { useState, useEffect, useContext } from 'react';
+import AuthContext from '../context/AuthContext';
+import axios from 'axios';
+import TaskForm from '../components/TaskForm';
+import TaskItem from '../components/TaskItem';
+import toast from 'react-hot-toast';
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filterStatus, setFilterStatus] = useState("all");
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filterStatus, setFilterStatus] = useState('all');
 
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const res = await axios.get(
-          "https://taskmaster-intern-task.vercel.app/api/tasks",
-        );
+        const res = await axios.get('https://taskmaster-intern-task.vercel.app/api/tasks');
         setTasks(res.data);
       } catch (err) {
-        toast.error("Failed to load tasks");
+        toast.error('Failed to load tasks');
       } finally {
         setLoading(false);
       }
@@ -30,229 +28,140 @@ const Dashboard = () => {
 
   const addTask = async (taskData) => {
     try {
-      const res = await axios.post(
-        "https://taskmaster-intern-task.vercel.app/api/tasks",
-        taskData,
-      );
+      const res = await axios.post('https://taskmaster-intern-task.vercel.app/api/tasks', taskData);
       setTasks([res.data, ...tasks]);
-      toast.success("Task Added");
+      toast.success('Task Added');
     } catch (err) {
-      toast.error("Error adding task");
+      toast.error('Error adding task');
     }
   };
 
   const toggleTask = async (id) => {
     try {
       const taskToToggle = tasks.find((t) => t._id === id);
-      const res = await axios.put(
-        `https://taskmaster-intern-task.vercel.app/api/tasks/${id}`,
-        {
-          isCompleted: !taskToToggle.isCompleted,
-        },
-      );
+      const res = await axios.put(`https://taskmaster-intern-task.vercel.app/api/tasks/${id}`, {
+        isCompleted: !taskToToggle.isCompleted,
+      });
       setTasks(tasks.map((t) => (t._id === id ? res.data : t)));
     } catch (err) {
-      toast.error("Error updating task");
+      toast.error('Error updating task');
     }
   };
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(
-        `https://taskmaster-intern-task.vercel.app/api/tasks/${id}`,
-      );
+      await axios.delete(`https://taskmaster-intern-task.vercel.app/api/tasks/${id}`);
       setTasks(tasks.filter((t) => t._id !== id));
-      toast.success("Task Deleted");
+      toast.success('Task Deleted');
     } catch (err) {
-      toast.error("Error deleting task");
+      toast.error('Error deleting task');
     }
   };
 
   const totalTasks = tasks.length;
-  const pendingTasks = tasks.filter((t) => !t.isCompleted).length;
-  const completedTasks = tasks.filter((t) => t.isCompleted).length;
+  const pendingTasks = tasks.filter(t => !t.isCompleted).length;
+  const completedTasks = tasks.filter(t => t.isCompleted).length;
 
-  const filteredTasks = tasks.filter((task) => {
-    const matchesSearch = task.title
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
-    const matchesFilter =
-      filterStatus === "all"
-        ? true
-        : filterStatus === "completed"
-          ? task.isCompleted
-          : !task.isCompleted;
+  const filteredTasks = tasks.filter(task => {
+    const matchesSearch = task.title.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesFilter = 
+      filterStatus === 'all' ? true :
+      filterStatus === 'completed' ? task.isCompleted :
+      !task.isCompleted;
     return matchesSearch && matchesFilter;
   });
 
   return (
     <div className="min-h-screen pt-28 pb-10 px-4 transition-colors duration-300">
       <div className="max-w-5xl mx-auto">
+        
         {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
           <div>
-            {/* FIXED: Explicit text-white for dark mode */}
-            <h1 className="text-3xl font-bold text-slate-800 dark:text-white transition-colors">
-              Workspace
-            </h1>
-            <p className="text-slate-500 dark:text-slate-400 mt-1">
-              Manage your daily goals, {user && user.name}.
-            </p>
+            <h1 className="text-3xl font-bold transition-colors">Workspace</h1>
+            <p className="mt-1 opacity-75">Manage your daily goals, {user && user.name}.</p>
           </div>
           <div className="text-right hidden md:block">
-            <p className="text-sm font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
-              Current Date
-            </p>
-            <p className="text-xl font-bold text-slate-700 dark:text-slate-200">
-              {new Date().toLocaleDateString("en-US", {
-                weekday: "long",
-                month: "long",
-                day: "numeric",
-              })}
-            </p>
+            <p className="text-sm font-semibold opacity-60 uppercase tracking-wider">Current Date</p>
+            <p className="text-xl font-bold opacity-90">{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
           </div>
         </div>
 
         {/* Stats Row */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          {/* Card 1: Total */}
-          <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 transition-colors">
+          <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 transition-colors">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-slate-400 text-sm font-semibold uppercase">
-                  Total Tasks
-                </p>
-                <p className="text-3xl font-bold text-slate-800 dark:text-white mt-1">
-                  {totalTasks}
-                </p>
+                <p className="opacity-60 text-sm font-semibold uppercase">Total Tasks</p>
+                <p className="text-3xl font-bold mt-1">{totalTasks}</p>
               </div>
-              <div className="w-12 h-12 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 rounded-full flex items-center justify-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-                  />
-                </svg>
+              <div className="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 transition-colors">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-amber-500 text-sm font-semibold uppercase">Pending</p>
+                <p className="text-3xl font-bold mt-1">{pendingTasks}</p>
+              </div>
+              <div className="w-12 h-12 bg-amber-50 text-amber-500 rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
               </div>
             </div>
           </div>
 
-          {/* Card 2: Pending */}
-          <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 transition-colors">
+          <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 transition-colors">
             <div className="flex items-center justify-between">
-              <div>
-                <p className="text-amber-500 text-sm font-semibold uppercase">
-                  Pending
-                </p>
-                <p className="text-3xl font-bold text-slate-800 dark:text-white mt-1">
-                  {pendingTasks}
-                </p>
+               <div>
+                <p className="text-emerald-500 text-sm font-semibold uppercase">Completed</p>
+                <p className="text-3xl font-bold mt-1">{completedTasks}</p>
               </div>
-              <div className="w-12 h-12 bg-amber-50 dark:bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 3: Completed */}
-          <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 transition-colors">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-emerald-500 text-sm font-semibold uppercase">
-                  Completed
-                </p>
-                <p className="text-3xl font-bold text-slate-800 dark:text-white mt-1">
-                  {completedTasks}
-                </p>
-              </div>
-              <div className="w-12 h-12 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-500 rounded-full flex items-center justify-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
+              <div className="w-12 h-12 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
               </div>
             </div>
           </div>
         </div>
 
         {/* Task Form Container */}
-        <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 p-6 mb-8 transition-colors">
-          <TaskForm onAdd={addTask} />
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-8 transition-colors">
+           <TaskForm onAdd={addTask} />
+           
+           <div className="h-px bg-slate-100 my-6"></div>
 
-          <div className="h-px bg-slate-100 dark:bg-slate-800 my-6"></div>
-
-          <div className="flex flex-col sm:flex-row gap-4">
-            <div className="relative flex-1">
-              <svg
-                className="absolute left-4 top-3.5 h-5 w-5 text-slate-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-              {/* FIXED: Input background darker than card to show depth */}
-              <input
-                type="text"
-                placeholder="Search tasks..."
-                className="w-full pl-12 pr-4 py-3 bg-slate-50 dark:bg-slate-950 border-none rounded-xl text-slate-700 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none transition placeholder-slate-400"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </div>
-
-            <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl transition-colors">
-              {["all", "pending", "completed"].map((status) => (
-                <button
-                  key={status}
-                  onClick={() => setFilterStatus(status)}
-                  className={`px-6 py-2 rounded-lg text-sm font-semibold capitalize transition-all ${
-                    filterStatus === status
-                      ? "bg-white dark:bg-slate-600 text-slate-800 dark:text-white shadow-sm"
-                      : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
-                  }`}
-                >
-                  {status}
-                </button>
-              ))}
-            </div>
-          </div>
+           <div className="flex flex-col sm:flex-row gap-4">
+             <div className="relative flex-1">
+               <svg className="absolute left-4 top-3.5 h-5 w-5 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+               </svg>
+               <input 
+                 type="text" 
+                 placeholder="Search tasks..." 
+                 className="w-full pl-12 pr-4 py-3 bg-slate-50 border-none rounded-xl text-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none transition"
+                 value={searchQuery}
+                 onChange={(e) => setSearchQuery(e.target.value)}
+               />
+             </div>
+             
+             <div className="flex bg-slate-100 p-1 rounded-xl transition-colors">
+               {['all', 'pending', 'completed'].map((status) => (
+                 <button
+                   key={status}
+                   onClick={() => setFilterStatus(status)}
+                   className={`px-6 py-2 rounded-lg text-sm font-semibold capitalize transition-all ${
+                     filterStatus === status 
+                       ? 'bg-white shadow-sm' 
+                       : 'opacity-60 hover:opacity-100'
+                   }`}
+                 >
+                   {status}
+                 </button>
+               ))}
+             </div>
+           </div>
         </div>
 
         {/* Task List */}
@@ -261,35 +170,16 @@ const Dashboard = () => {
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
           </div>
         ) : tasks.length === 0 ? (
-          <div className="text-center py-16 bg-white dark:bg-slate-900 rounded-3xl border border-dashed border-slate-300 dark:border-slate-800 transition-colors">
-            <div className="w-16 h-16 bg-slate-50 dark:bg-slate-800 text-slate-300 dark:text-slate-600 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                />
-              </svg>
+          <div className="text-center py-16 bg-white rounded-3xl border border-dashed border-slate-300 transition-colors">
+            <div className="w-16 h-16 bg-slate-50 text-slate-300 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
             </div>
-            <p className="text-slate-500 dark:text-slate-400 text-lg">
-              No tasks found.
-            </p>
-            <p className="text-slate-400 dark:text-slate-500 text-sm">
-              Create a new task to get started.
-            </p>
+            <p className="opacity-75 text-lg">No tasks found.</p>
+            <p className="opacity-50 text-sm">Create a new task to get started.</p>
           </div>
         ) : filteredTasks.length === 0 ? (
           <div className="text-center py-10">
-            <p className="text-slate-500 dark:text-slate-400">
-              No tasks match your search.
-            </p>
+            <p className="opacity-75">No tasks match your search.</p>
           </div>
         ) : (
           <div className="space-y-1">
